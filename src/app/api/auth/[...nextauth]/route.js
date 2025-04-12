@@ -6,7 +6,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://course-pilot-serverr.vercel.app",
 });
 
 const handler = NextAuth({

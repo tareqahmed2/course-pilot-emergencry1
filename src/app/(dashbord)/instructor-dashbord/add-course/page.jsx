@@ -22,18 +22,22 @@ const AddCourse = () => {
       ...data,
       rating: Number(data.rating),
       duration: Number(data.duration),
-      status: 'pending',
-      courseStatus: 'Active',
+      status: "pending",
+      courseStatus: "Active",
       date: new Date(),
-      email: user?.email
-    }
-    axios.post('http://localhost:5000/student-course', courseData)
-      .then(result => {
+      email: user?.email,
+    };
+    axios
+      .post(
+        "https://course-pilot-serverr.vercel.app/student-course",
+        courseData
+      )
+      .then((result) => {
         if (result.data.insertedId) {
-          toast.success('Course Add Success')
+          toast.success("Course Add Success");
           reset();
         }
-      })
+      });
   };
 
   return (
@@ -110,14 +114,18 @@ const AddCourse = () => {
               type="number"
               {...register("price", {
                 required: "Price is required",
-                min: { value: 1, message: "Price must be at least $1" }
+                min: { value: 1, message: "Price must be at least $1" },
               })}
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-emerald-400"
               placeholder="Enter price"
               step="0.01"
               onKeyDown={(e) => e.key === "e" && e.preventDefault()}
             />
-            {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>}
+            {errors.price && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.price.message}
+              </p>
+            )}
           </div>
         </div>
 
@@ -205,7 +213,6 @@ const AddCourse = () => {
               <p className="text-red-500 text-sm">{errors.courseTag.message}</p>
             )}
           </div>
-
         </div>
 
         {/* 5th Row */}

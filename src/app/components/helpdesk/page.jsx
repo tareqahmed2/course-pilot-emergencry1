@@ -63,7 +63,7 @@ export default function HelpDesk() {
   }, []);
 
   const fetchData = () => {
-    fetch("http://localhost:5000/postData")
+    fetch("https://course-pilot-serverr.vercel.app/postData")
       .then((res) => res.json())
       .then((data) => {
         setData(data || []);
@@ -183,13 +183,16 @@ export default function HelpDesk() {
     setData((prevData) => [postInfo, ...prevData]);
 
     try {
-      const res = await fetch(`http://localhost:5000/Upload`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postInfo),
-      });
+      const res = await fetch(
+        `https://course-pilot-serverr.vercel.app/Upload`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postInfo),
+        }
+      );
 
       if (!res.ok) {
         // Roll back optimistic update if failed
@@ -223,7 +226,7 @@ export default function HelpDesk() {
       // Optimistic update
       setData((prevData) => prevData.filter((post) => post._id !== id));
 
-      fetch(`http://localhost:5000/postDelete/${id}`, {
+      fetch(`https://course-pilot-serverr.vercel.app/postDelete/${id}`, {
         method: "DELETE",
       }).then((res) => {
         if (!res.ok) {

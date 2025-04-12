@@ -127,7 +127,7 @@ const CertificatePage = () => {
                       width={40}
                       height={40}
                       priority
-                    /> */}
+                    /> */}git 
                   </div>
 
                   <div className="text-center mt-4">

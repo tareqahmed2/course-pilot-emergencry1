@@ -13,6 +13,7 @@ import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
 import useAxiosPublic from "@/app/axios/hooks/useAxiosPublic";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const RegisterPage = () => {
   const [darkmode, setDarkmode] = useState();
@@ -21,6 +22,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
   });
+  const { signUpWithEmailPassword } = useAuth();
   const [error, setError] = useState("");
   console.log("error", error);
   const handleChange = (e) => {
@@ -34,6 +36,7 @@ const RegisterPage = () => {
     const { name, email, password } = formData;
     console.log(name, email, password);
     //  check user
+    await signUpWithEmailPassword(name, email, password);
 
     // POST  user
 

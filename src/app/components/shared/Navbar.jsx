@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,8 +28,8 @@ export default function Navbar() {
   const [darkmode, setDarkmode] = useState(false);
   const [navbarBackground, setNavbarBackground] = useState(false);
   const pathname = usePathname();
-  const { user, loading: authLoading } = useAuth();
-  const { data: session, status } = useSession();
+  const { logOut, user, loading: authLoading } = useAuth();
+  console.log(user);
   const [sessionLoading, setSessionLoading] = useState(true);
 
   const [position, setPosition] = React.useState("bottom");
@@ -43,8 +42,8 @@ export default function Navbar() {
     }
   }, [status]);
 
-  const handleSignOut = async () => {
-    await signOut();
+  const handleLogOut = async () => {
+    await logOut();
   };
 
   useEffect(() => {
@@ -256,7 +255,7 @@ export default function Navbar() {
                             </Button>
                           ) : user || session?.user ? (
                             <Button
-                              onClick={handleSignOut}
+                              onClick={handleLogOut}
                               size="sm"
                               variant="ghost"
                               className="rounded-full bg-[#f14e4e] hover:bg-[#00BC7D] hover:border hover:border-[#00BC7D] hover:text-white"

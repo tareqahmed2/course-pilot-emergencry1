@@ -11,6 +11,7 @@ import LoginButton from "@/app/auth/LoginButton";
 import { Button } from "@/components/ui/button";
 import { CiLight } from "react-icons/ci";
 import { MdOutlineDarkMode } from "react-icons/md";
+import { useAuth } from "@/context/AuthContext";
 
 const SignInPage = () => {
   const [darkmode, setDarkmode] = useState();
@@ -18,30 +19,40 @@ const SignInPage = () => {
     email: "",
     password: "",
   });
-
+  const { signInWithEmailPassword } = useAuth();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   console.log("Sign In Data:", formData.email, formData.password);
+  //   try {
+  //     const res = await signIn("credentials", {
+  //       redirect: false,
+  //       email: formData.email,
+  //       password: formData.password,
+  //     });
+  //     console.log(res, "res");
+  //     if (res.error) {
+  //       console.log(res.error);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  //   // You can replace this with your authentication logic
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Sign In Data:", formData.email, formData.password);
-    try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: formData.email,
-        password: formData.password,
-      });
-      console.log(res, "res");
-      if (res.error) {
-        console.log(res.error);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    // You can replace this with your authentication logic
-  };
+    setError("");
 
+    try {
+      await signInWithEmailPassword(formData.email, formData.password); // Use NextAuth to sign in
+      navigate("/"); // or wherever you want to go after login
+    } catch (err) {
+      setError(err.message);
+    }
+  };
   const handleProviderSignIn = (provider) => {
     signIn(provider); // Use NextAuth to sign in via external provider
   };

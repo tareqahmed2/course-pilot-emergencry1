@@ -11,6 +11,7 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.0",
     "@headlessui/react": "^2.2.1",
+    "@lottiefiles/react-lottie-player": "^3.6.0",
     "@radix-ui/react-avatar": "^1.1.4",
     "@radix-ui/react-dialog": "^1.1.7",
     "@radix-ui/react-dropdown-menu": "^2.1.6",
@@ -29,6 +30,7 @@
     "dom-to-image": "^2.6.0",
     "dotenv": "^16.4.7",
     "file-saver": "^2.0.5",
+    "firebase": "^11.6.0",
     "framer-motion": "^12.5.0",
     "gsap": "^3.12.7",
     "init": "^0.1.2",
